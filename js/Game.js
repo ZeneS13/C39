@@ -55,7 +55,7 @@ class Game {
       var index = 0;
 
       //x and y position of the cars
-      var x = 175 ;
+      var x = 220 ;
       var y;
 
       for(var plr in allPlayers){
@@ -70,7 +70,9 @@ class Game {
         cars[index-1].y = y;
 
         if (index === player.index){
-          cars[index - 1].shapeColor = "red";
+         // cars[index - 1].shapeColor = "red";
+         fill("red");
+         ellipse(x,y,70,100);
           camera.position.x = displayWidth/2;
           camera.position.y = cars[index-1].y;
         }
@@ -86,14 +88,24 @@ class Game {
       player.update();
     }
 
-    if(player.distance > 3860){
+    if(player.distance > 4800){
       gameState = 2;
     }
    
     drawSprites();
   }
-
   end(){
+    var button=createButton('Press to reset');
+    var endGame=createElement('h1');
+    endGame.html(player.name+" has won. Press reset and refresh the page to play again");
+    endGame.position(displayWidth/2 + 60, 30);
+    button.position(displayWidth/2 - 50, 0);
+    button.mousePressed(function(){
+    game.update(0);
+    player.updateCount(0);
+
+    });
     console.log("Game Ended");
   }
+
 }
